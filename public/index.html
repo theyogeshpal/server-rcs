@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Campaign Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left Column: Device Status -->
+    <div class="glass-card device-panel">
+      <div class="device-title">Active Fleet Status</div>
+      <div class="device-count-wrapper">
+        <div id="device-count">0</div>
+      </div>
+      <div class="status-indicator">
+        <div class="pulse"></div>
+        <span>System Online & Listening</span>
+      </div>
+      <p style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
+        Android devices currently connected via WebSockets ready to broadcast messages.
+      </p>
+    </div>
+
+    <!-- Right Column: Campaign Form -->
+    <div class="glass-card">
+      <div class="form-header">
+        <h1>Launch Campaign</h1>
+        <p style="color: var(--text-secondary);">Configure and dispatch messages across your device fleet.</p>
+      </div>
+
+      <form id="campaignForm">
+        <div class="form-group">
+          <label for="textMessage">Campaign Message</label>
+          <textarea class="form-control" id="textMessage" name="textMessage" required placeholder="Type your compelling message here..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="imageUpload">Attachment (Optional Media)</label>
+          <div class="file-input-wrapper">
+            <span id="imageName" style="color: var(--text-secondary);">Drag & drop an image or click to browse</span>
+            <input type="file" id="imageUpload" name="image" accept="image/*">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="excelUpload">Contact Database (.xlsx, .csv)</label>
+          <div class="file-input-wrapper" style="border-color: rgba(59, 130, 246, 0.5);">
+            <span id="excelName" style="color: var(--accent-color); font-weight: 500;">Upload target numbers sheet *</span>
+            <input type="file" id="excelUpload" name="excel" accept=".xlsx, .xls, .csv" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="startBtn">Dispatch Campaign Now</button>
+      </form>
+      
+      <div id="resultMessage"></div>
+    </div>
+  </div>
+
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
