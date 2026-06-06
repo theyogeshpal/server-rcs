@@ -1,6 +1,6 @@
 const xlsx = require('xlsx');
 
-function startCampaign(excelFilePath, textMessage, imageUrl, connectedSockets) {
+function startCampaign(campaignId, excelFilePath, textMessage, imageUrl, connectedSockets) {
   if (connectedSockets.length === 0) {
     throw new Error('No devices connected. Cannot start campaign.');
   }
@@ -50,8 +50,8 @@ function startCampaign(excelFilePath, textMessage, imageUrl, connectedSockets) {
     const socket = connectedSockets[i];
 
     if (chunk.length > 0) {
-      // 3. Emit event to the socket
       socket.emit('START_CAMPAIGN', {
+        campaignId: campaignId,
         textMessage: textMessage,
         imageUrl: imageUrl, // this is a relative URL like /uploads/123.jpg
         contacts: chunk
